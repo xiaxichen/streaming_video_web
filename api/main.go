@@ -6,6 +6,24 @@ import (
 	"streaming_video_web/api/handler"
 )
 
+type middleWareHandler struct {
+	r *httprouter.Router
+}
+
+func NewMiddleWareHandler(r *httprouter.Router) http.Handler {
+	m := middleWareHandler{
+		r: r,
+	}
+	return m
+}
+
+func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	//check session
+	validateUserSession(r)
+
+	m.r.ServeHTTP(w, r)
+}
+
 func RegisterHandler() *httprouter.Router {
 	router := httprouter.New()
 	router.POST("/user", handler.CreateUser)
@@ -15,5 +33,6 @@ func RegisterHandler() *httprouter.Router {
 
 func main() {
 	router := RegisterHandler()
-	http.ListenAndServe(":8000", router)
+	wareHandler := NewMiddleWareHandler(router)
+	http.ListenAndServe(":8000", wareHandler)
 }

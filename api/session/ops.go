@@ -41,7 +41,7 @@ func GenerateNewSessionId(un string) string {
 	ct := nowInMilli()
 	ttl := ct + 30*60*1000 // Severside session valid time: 30 min
 
-	ss := &def.SimpleSession{Username: un, TTL: ttl}
+	ss := &def.SimpleSession{UserName: un, TTL: ttl}
 	sessionMap.Store(id, ss)
 	err := dbops.InsertSession(id, ttl, un)
 	if err != nil {
@@ -59,7 +59,7 @@ func IsSessionExpired(sid string) (string, bool) {
 			return "", true
 		}
 
-		return ss.(*def.SimpleSession).Username, false
+		return ss.(*def.SimpleSession).UserName, false
 	}
 
 	return "", true

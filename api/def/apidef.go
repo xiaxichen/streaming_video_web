@@ -25,6 +25,6 @@ type Comment struct {
 }
 
 type SimpleSession struct {
-	Username string //login name
+	UserName string //login name
 	TTL      int64
 }
