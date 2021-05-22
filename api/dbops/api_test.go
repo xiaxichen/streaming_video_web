@@ -46,7 +46,7 @@ func TestGetUserCredential(t *testing.T) {
 		want    string
 		wantErr bool
 	}{
-		{name: "1", args: args{loginName: "avenssi"}, wantErr: false},
+		{name: "1", args: args{loginName: "avenssi"},want: "123", wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
