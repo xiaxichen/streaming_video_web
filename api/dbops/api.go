@@ -7,7 +7,6 @@ func AddUserCredential(loginName, pwd string) error {
 	if err != nil {
 		return err
 	}
-	defer dbConn.Close()
 	_, err = prepare.Exec(loginName, pwd)
 	if err != nil {
 		return err
@@ -20,7 +19,6 @@ func GetUserCredential(loginName string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer dbConn.Close()
 	var pwd string
 	err = prepare.QueryRow(loginName).Scan(pwd)
 	if err != nil {
@@ -34,7 +32,6 @@ func DeleteUser(loginName, pwd string) error {
 	if err != nil {
 		return err
 	}
-	defer dbConn.Close()
 	exec, err := prepare.Exec(loginName, pwd)
 	if err != nil {
 		return err
