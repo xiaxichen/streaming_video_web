@@ -1,6 +1,9 @@
 package dbops
 
-import "errors"
+import (
+	"encoding/json"
+	"errors"
+)
 
 func AddUserCredential(loginName, pwd string) error {
 	prepare, err := dbConn.Prepare("INSERT INTO users (login_name,pwd) Values (?, ?)")
@@ -20,7 +23,8 @@ func GetUserCredential(loginName string) (string, error) {
 		return "", err
 	}
 	var pwd string
-	err = prepare.QueryRow(loginName).Scan(pwd)
+	json.Unmarshal()
+	err = prepare.QueryRow(loginName).Scan(&pwd)
 	if err != nil {
 		return "", err
 	}
