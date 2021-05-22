@@ -1,7 +1,6 @@
 package dbops
 
 import (
-	"encoding/json"
 	"errors"
 )
 
@@ -23,7 +22,6 @@ func GetUserCredential(loginName string) (string, error) {
 		return "", err
 	}
 	var pwd string
-	json.Unmarshal()
 	err = prepare.QueryRow(loginName).Scan(&pwd)
 	if err != nil {
 		return "", err
